@@ -11,6 +11,7 @@ class User:
         self._age = age
         self._address = address
         self._logins = 1
+        # self._search_history = {}
 
     # getters
     def get_name(self):
@@ -34,6 +35,19 @@ class User:
     def get_logins(self):
         return self._logins
 
+    # def get_search_history(self):
+    #     return self._search_history
+
+    def return_info(self):
+        return {"Name": self._name,
+                "Username": self._username,
+                "Email": self._email,
+                "Password": self._password,
+                "Age": self._age,
+                "Address": self._address,
+                "Logins": self._logins}
+                # "Search History": self._search_history}
+
     def __str__(self):
         return "Name: " + str(self._username) + \
                 "\nUsername: " + str(self._username) + \
@@ -43,10 +57,9 @@ class User:
                 "\nAddress: " + str(self._address) + \
                 "\nLogins: " + str(self._logins)
 
-
-# example user
-x = User("Jatin", "jmather", "jatinm2@illinois.edu", "fakepassword", 18, "Champaign, IL")
-
-# prints out all info about the user
-print(x)
+# # example user
+# x = User("Jatin", "jmather", "jatinm2@illinois.edu", "fakepassword", 18, "Champaign, IL")
+#
+# # prints out all info about the user
+# print(x.return_info())
 

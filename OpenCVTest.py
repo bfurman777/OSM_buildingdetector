@@ -4,6 +4,11 @@ oneBuildingPic = 'building.jpg'
 
 
 
+
+
+
+#HoughLines for edges   #LIVE DEMO FOR HOUGHLINES???
+#'''
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
@@ -27,6 +32,7 @@ for l in lines:
 plt.imshow(im)
 plt.title('xGradient {}, yGradient {}'.format(xGradient, yGradient)), plt.xticks([]), plt.yticks([])
 plt.show()
+#'''
 
 
 
@@ -34,20 +40,13 @@ plt.show()
 
 
 
-
-
-
-
-
-
-
-#loop through a bunch of gradient levels for an image in the same local directory
+#loop through a bunch of gradient levels for an image in the same local directory - BROKEN???
 '''
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread('building.jpg',0)
+img = cv2.imread(manyBuildingPic,0)
 for xGradient in range(50,300,10):
     for yGradient in range(50,300,10):
         edges = cv2.Canny(img,xGradient,yGradient)
@@ -61,13 +60,13 @@ for xGradient in range(50,300,10):
 #'''
 
 
-'''
+#'''    #LIVE DEMO FOR COUNTROURS???
 #Contours
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
 
-im = cv.imread('building.jpg')
+im = cv.imread(manyBuildingPic)
 imgray = cv.cvtColor(im, cv.COLOR_BGR2GRAY)
 
 for threshold in range(0, 200, 5):
@@ -86,7 +85,7 @@ for threshold in range(0, 200, 5):
 #'''
 
 
-#BROKEN TODO - to similate a slider with keyboard input
+#BROKEN - to similate a slider with keyboard input
 #shows edges of a single image in the same local directory
 '''
 import cv2

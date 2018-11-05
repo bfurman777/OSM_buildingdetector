@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df152647-a9d8-4bf6-8619-36adf1f57257" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/Database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/backend.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Users.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Users.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +14,10 @@
     <session id="1397477428">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,24 +37,24 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="py" value="7088" />
-          <entry key="txt" value="85" />
+          <entry key="txt" value="139" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="85" />
+          <entry key="PLAIN_TEXT" value="139" />
           <entry key="Python" value="7088" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/OSMAPI_Interactor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-149">
-              <caret column="48" selection-start-column="48" selection-end-column="88" />
+            <state relative-caret-position="187">
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -63,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/Users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="1105">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
               <folding>
                 <marker date="1541353051402" expanded="true" signature="108:113" ph="..." />
                 <marker date="1541353051402" expanded="true" signature="529:561" ph="..." />
@@ -75,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/Database.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -90,7 +89,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/backend.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
+            <state relative-caret-position="833">
               <caret line="50" column="115" selection-start-line="50" selection-start-column="115" selection-end-line="50" selection-end-column="115" />
               <folding>
                 <element signature="e#77#91#0" expanded="true" />
@@ -98,7 +97,6 @@
                 <marker date="1541353134876" expanded="true" signature="715:720" ph="..." />
                 <marker date="1541353134876" expanded="true" signature="1096:1101" ph="..." />
                 <marker date="1541353134876" expanded="true" signature="1433:2273" ph="..." />
-                <marker date="1541353134876" expanded="true" signature="1874:2184" ph="..." />
               </folding>
             </state>
           </provider>
@@ -136,7 +134,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,10 +150,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/github" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -300,15 +298,23 @@
       <option name="project" value="LOCAL" />
       <updated>1541308653886</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added a database, started writing backend code">
+      <created>1541353149919</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1541353149919</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
@@ -350,7 +356,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated code, added comments" />
     <MESSAGE value="added some features to users class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some features to users class" />
+    <MESSAGE value="Added a database, started writing backend code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a database, started writing backend code" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -361,26 +368,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskTest/OSMAPI_Interactor.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskTest/Users.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskTest/flaskTest.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/OSMAPI_Interactor.py">
+    <entry file="file://$PROJECT_DIR$/flaskTest/OSMAPI_Interactor.py" />
+    <entry file="file://$PROJECT_DIR$/flaskTest/Users.py" />
+    <entry file="file://$PROJECT_DIR$/flaskTest/flaskTest.py" />
+    <entry file="file://$PROJECT_DIR$/backend/mydatabase.db">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-149">
-          <caret column="48" selection-start-column="48" selection-end-column="88" />
+        <state relative-caret-position="17">
+          <caret line="1" column="3803" lean-forward="true" selection-start-line="1" selection-start-column="3803" selection-end-line="1" selection-end-column="3803" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/Users.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="1105">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
           <folding>
             <marker date="1541353051402" expanded="true" signature="108:113" ph="..." />
             <marker date="1541353051402" expanded="true" signature="529:561" ph="..." />
@@ -390,16 +391,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/mydatabase.db">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="3803" lean-forward="true" selection-start-line="1" selection-start-column="3803" selection-end-line="1" selection-end-column="3803" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/backend.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
+        <state relative-caret-position="833">
           <caret line="50" column="115" selection-start-line="50" selection-start-column="115" selection-end-line="50" selection-end-column="115" />
           <folding>
             <element signature="e#77#91#0" expanded="true" />
@@ -407,7 +401,6 @@
             <marker date="1541353134876" expanded="true" signature="715:720" ph="..." />
             <marker date="1541353134876" expanded="true" signature="1096:1101" ph="..." />
             <marker date="1541353134876" expanded="true" signature="1433:2273" ph="..." />
-            <marker date="1541353134876" expanded="true" signature="1874:2184" ph="..." />
           </folding>
         </state>
       </provider>
@@ -419,6 +412,13 @@
           <folding>
             <element signature="e#77#91#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/OSMAPI_Interactor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>

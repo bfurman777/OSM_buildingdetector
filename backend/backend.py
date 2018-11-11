@@ -64,7 +64,7 @@ def show_database():
         print(row)
 
 
-# sample demo code
+# # sample demo code
 # print(create_user(name="Jatin", username="jmather125", email="jatinm2@illinois.edu", password="fakepassword123", age=18, address="Champaign, IL"))
 # print()
 # print(show_database())
@@ -75,5 +75,5 @@ def show_database():
 # print()
 # print(show_database())
 # print()
-# print(add_search_history(username="jmather125", password="fakepassword123", query="Thomas Siebel Center for Comp. Sci."))
-# print(show_database())
+# # print(add_search_history(username="jmather125", password="fakepassword123", query="Thomas Siebel Center for Comp. Sci."))
+# # print(show_database())

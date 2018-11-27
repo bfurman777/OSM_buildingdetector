@@ -1,13 +1,67 @@
 
 manyBuildingPic = 'some_houses.png'
 oneBuildingPic = 'building.jpg'
+apiKey_MapBox = 'pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYSI6ImNqZGFrZ2c2dzFlMWgyd2x0ZHdmMDB6NzYifQ.9Pl3XOO82ArX94fHV289Pg'
 
 
 
+'''GETTING IMAGES # TODO (From James's ):
+
+"""Contains functions dealing with geolocation. This is mostly used for finding
+coordinates from Slippy Map tiles and vice versa.  Slippy Map tiles are used in
+aerial imagery APIs.
+ For more information (and for the source of some of these functions) see
+https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+"""
+import math
+def deg2tile(lat_deg, lon_deg, zoom):
+    """Converts coordinates into the nearest x,y Slippy Map tile"""
+    lat_rad = math.radians(lat_deg)
+    n = 2.0 ** zoom
+    xtile = int((lon_deg + 180.0) / 360.0 * n)
+    ytile = int((1.0 - math.log(math.tan(lat_rad) + (1 / math.cos(lat_rad)))
+                 / math.pi) / 2.0 * n)
+    return (xtile, ytile)
+def tile2deg(xtile, ytile, zoom):
+    """Returns the coordinates of the northwest corner of a Slippy Map
+    x,y tile"""
+    n = 2.0 ** zoom
+    lon_deg = xtile / n * 360.0 - 180.0
+    lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * ytile / n)))
+    lat_deg = math.degrees(lat_rad)
+    return (lat_deg, lon_deg)
 
 
 
-#HoughLines for edges   #LIVE DEMO FOR HOUGHLINES???
+"""Interface for downloading aerial imagery from Mapbox.
+"""
+import requests
+from PIL import Image
+from io import BytesIO
+from geolocation import *
+class ImageryDownloader(object):
+    def __init__(self, access_token):
+        """Initializes the object with a Mapbox access token"""
+        self.access_token = access_token
+
+    def download_tile(self, x, y, zoom):
+        """Downloads a map tile as an image.
+           Note that x and y refer to Slippy Map coordinates.
+        """
+        url = "https://a.tiles.mapbox.com/v4/digitalglobe.316c9a2e/" \
+               "" + str(zoom) + "/" + str(x) + "/" + str(y) + "" \
+               ".png?access_token=" + self.access_token
+        req = requests.get(url)
+        image = Image.open(BytesIO(req.content))
+        return image
+
+img_dwnloader = ImageryDownloader(apiKey_MapBox)
+img_dwnloader.download_tile(2,2,3)
+'''
+
+
+
+#HoughLines for edges
 #'''
 import numpy as np
 import cv2 as cv
@@ -60,7 +114,7 @@ for xGradient in range(50,300,10):
 #'''
 
 
-#'''    #LIVE DEMO FOR COUNTROURS???
+'''
 #Contours
 import numpy as np
 import cv2 as cv

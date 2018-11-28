@@ -13,7 +13,7 @@ import backend
 # to call functions
 # backend.create_user(info)
 # to see the changes
-# backend.show_database()
+backend.show_database()
 # to clear the database
 # backend.clear_database()
 
@@ -50,5 +50,3 @@ def result():
 
 if __name__ == '__main__': #causes the program to boot
    app.run(debug=True)
-
-

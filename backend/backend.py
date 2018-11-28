@@ -24,7 +24,7 @@ Info format:
 "logins": 0}
 """
 def create_user(info):
-    if check_user_exists(info["username"], info["password"]) is True:
+    if check_user_exists(info["username"]):
         return False
     table = init_backend()
     table.insert(info)
@@ -38,17 +38,15 @@ def user_sign_in(username=None, password=None):
 
     table = init_backend()
     # updates this person's logins
-    table.update({"username": username, "logins": table.find_one(Username=username)["logins"] + 1}, ["username"])
+    table.update({"username": username, "logins": table.find_one(username=username)["logins"] + 1}, ["username"])
     return True
 
 
 # called inside every function. Checks if user is in database given username and password
-def check_user_exists(username=None, password=None):
+def check_user_exists(username):
     table = init_backend()
-
-    if table.find_one(Username=username, Password=password) is not None:
+    if table.find_one(username=username) is not None:
         return True
-
     else:
         return False
 

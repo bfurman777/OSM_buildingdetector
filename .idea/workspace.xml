@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df152647-a9d8-4bf6-8619-36adf1f57257" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/OSM_buildingdetector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OSM_buildingdetector.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Flask/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Database.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/OSMAPI_Interactor.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/OSMAPI_Interactor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mydatabase.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,34 +41,37 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="9361" />
-          <entry key="txt" value="139" />
+          <entry key="py" value="10093" />
+          <entry key="txt" value="404" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="139" />
-          <entry key="Python" value="9361" />
+          <entry key="PLAIN_TEXT" value="404" />
+          <entry key="Python" value="10093" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flask/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+            <state relative-caret-position="35">
+              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/backend.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="34" column="15" lean-forward="true" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+            <state relative-caret-position="225">
+              <caret line="74" column="10" lean-forward="true" selection-start-line="74" selection-start-column="10" selection-end-line="80" selection-end-column="15" />
+              <folding>
+                <marker date="1543375333045" expanded="true" signature="2206:2250" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/OSMAPI_Interactor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
+            <state relative-caret-position="748">
               <caret line="53" column="24" lean-forward="true" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
               <folding>
                 <marker date="1543370342526" expanded="true" signature="319:863" ph="..." />
@@ -326,8 +325,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
-        <item itemvalue="Python.OSMAPI_Interactor" />
         <item itemvalue="Python.backend" />
+        <item itemvalue="Python.OSMAPI_Interactor" />
         <item itemvalue="Python.Users" />
         <item itemvalue="Python.Database" />
       </list>
@@ -365,14 +364,27 @@
       <option name="project" value="LOCAL" />
       <updated>1541353149919</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Started combinging frontend and backend, merged branches, imported backend code into app.py, and changed backend code to 1) have an __init__.py and 2) be function or class based and easily callable">
+      <created>1543373221681</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1543373221681</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Sign-ins from front end connect to back end!">
+      <created>1543374829613</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1543374829613</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24960254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
@@ -381,7 +393,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.3291815" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.48576513" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.75088966" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.7259787" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3985765" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -417,7 +429,9 @@
     <MESSAGE value="updated code, added comments" />
     <MESSAGE value="added some features to users class" />
     <MESSAGE value="Added a database, started writing backend code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a database, started writing backend code" />
+    <MESSAGE value="Started combinging frontend and backend, merged branches, imported backend code into app.py, and changed backend code to 1) have an __init__.py and 2) be function or class based and easily callable" />
+    <MESSAGE value="Sign-ins from front end connect to back end!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sign-ins from front end connect to back end!" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md" />
@@ -457,7 +471,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/OSMAPI_Interactor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
+        <state relative-caret-position="748">
           <caret line="53" column="24" lean-forward="true" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
           <folding>
             <marker date="1543370342526" expanded="true" signature="319:863" ph="..." />
@@ -466,17 +480,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flask/app.py">
+    <entry file="file://$PROJECT_DIR$/backend/backend.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        <state relative-caret-position="225">
+          <caret line="74" column="10" lean-forward="true" selection-start-line="74" selection-start-column="10" selection-end-line="80" selection-end-column="15" />
+          <folding>
+            <marker date="1543375333045" expanded="true" signature="2206:2250" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/backend.py">
+    <entry file="file://$PROJECT_DIR$/Flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="34" column="15" lean-forward="true" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+        <state relative-caret-position="35">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
         </state>
       </provider>
     </entry>

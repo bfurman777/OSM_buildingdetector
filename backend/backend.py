@@ -1,7 +1,9 @@
 # see https://dataset.readthedocs.io/en/latest/ for documentation on dataset
 import dataset
-from Users import *
 
+# import sys
+# sys.path.append('../')
+# import Flask.app
 
 # based on queries sent from frontend, backend will respond
 
@@ -14,14 +16,22 @@ def init_backend():
     return table
 
 
-# creates a new user with passed info. First checks if one exists with passed information
-def create_user(name=None, username=None, email=None, password=None, age=None, address=None):
-    if check_user_exists(username, password) is True:
+"""
+Creates a new user with passed info. First checks if one exists with passed information
+Info format:
+{"Name": name,
+"Username": username,
+"Email": email,
+"Password": password,
+"Age": age,
+"Address": address,
+"Logins": 0}
+"""
+def create_user(info):
+    if check_user_exists(info["Username"], info["Password"]) is True:
         return False
-
-    new_user = User(name, username, email, password, age, address)
     table = init_backend()
-    table.insert(new_user.return_info())
+    table.insert(info)
     return True
 
 

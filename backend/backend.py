@@ -1,10 +1,6 @@
 # see https://dataset.readthedocs.io/en/latest/ for documentation on dataset
 import dataset
 
-# import sys
-# sys.path.append('../')
-# import Flask.app
-
 # based on queries sent from frontend, backend will respond
 
 # call this to initialize backend
@@ -19,16 +15,16 @@ def init_backend():
 """
 Creates a new user with passed info. First checks if one exists with passed information
 Info format:
-{"Name": name,
-"Username": username,
-"Email": email,
-"Password": password,
-"Age": age,
-"Address": address,
-"Logins": 0}
+{"name": name,
+"username": username,
+"email": email,
+"password": password,
+"age": age,
+"address": address,
+"logins": 0}
 """
 def create_user(info):
-    if check_user_exists(info["Username"], info["Password"]) is True:
+    if check_user_exists(info["username"], info["password"]) is True:
         return False
     table = init_backend()
     table.insert(info)
@@ -42,7 +38,7 @@ def user_sign_in(username=None, password=None):
 
     table = init_backend()
     # updates this person's logins
-    table.update({"Username": username, "Logins": table.find_one(Username=username)["Logins"] + 1}, ["Username"])
+    table.update({"username": username, "logins": table.find_one(Username=username)["logins"] + 1}, ["username"])
     return True
 
 
@@ -74,16 +70,18 @@ def show_database():
         print(row)
 
 
-# # sample demo code
-# print(create_user(name="Jatin", username="jmather125", email="jatinm2@illinois.edu", password="fakepassword123", age=18, address="Champaign, IL"))
-# print()
-# print(show_database())
-# print()
-# print(check_user_exists(username="jmather125", password="fakepassword123"))
-# print()
-# print(user_sign_in(username="jmather125", password="fakepassword123"))
-# print()
-# print(show_database())
-# print()
-# # print(add_search_history(username="jmather125", password="fakepassword123", query="Thomas Siebel Center for Comp. Sci."))
-# # print(show_database())
+def clear_database():
+    table = init_backend()
+    table.drop()
+
+# create_user({"name": "Jatin",
+# "username": "jmather25",
+# "email": "jatinm2@illinois.edu",
+# "password": "fakepassword123",
+# "age": 18,
+# "address": "1234 Main Street",
+# "logins": 0})
+
+# show_database()
+# clear_database()
+# show_database()

@@ -11,13 +11,16 @@ import backend
 # since there is no function overlap there should be no problem
 
 # to call functions
-# backend.create_user(name="Jatin", username="jmather125", email="jatinm2@illinois.edu", password="fakepassword123", age=18, address="Champaign, IL")
+# backend.create_user(info)
 # to see the changes
 # backend.show_database()
+# to clear the database
+# backend.clear_database()
 
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
 
 @app.route('/') #base page that loads up on start/accessing the website
 def login():  #this method is called when the page starts up
@@ -31,12 +34,21 @@ def newAccount():
 
 @app.route('/test',methods = ['POST', 'GET'])   #this page is a test page to show if the information is saved
 def result():
-   if request.method == 'POST': # if the user hits the submit button. post is called
-      result = request.form
-      
-      return render_template("test.html",result = result) #this links to the result page and dispalys the proper information
+    if request.method == 'POST': # if the user hits the submit button. post is called
+        result = request.form
+        # changes result into a dict, currently is an immutable multi dict
+        info = {}
+        for k, v in result.items():
+            info[k.lower()] = v
+        # passes to backend
+        status = backend.create_user(info)
+        if status: # true condition
+            return render_template("test.html",result = result) #this links to the result page and dispalys the proper information
+        else: # false condition
+            return render_template("test.html", result=result)  # this links to the result page and dispalys the proper informatio
 
 
 if __name__ == '__main__': #causes the program to boot
-   app.run(debug = True)
+   app.run(debug=True)
+
 

@@ -13,7 +13,7 @@ import cv2
 import time
 
 # Testing, remove later
-filename = 'some_houses_gray.png'   #has to be in same file directory, in greyscale
+filename = 'some_houses_gray.png'   #has to be in same file directory, in greyscale      _gray
 
 
 image = cv2.imread(filename).copy()
@@ -23,7 +23,8 @@ width = image.shape[1]
 # all rectangles are parallel to the xy axis
 class Rectangle:
     all_rectangles = []
-    tolerable_distance_to_combine_rectangles = 25 # arbitrary number
+    removed_rectangles = [] # access removed_rectangles with get_removed_rectangles()
+    tolerable_distance_to_combine_rectangles = 11 # arbitrary number
 
     def __init__(self, init_points):
         self.points = init_points   # a point is a tuple
@@ -33,6 +34,7 @@ class Rectangle:
             print('TOO MANY POINTS IN A RECTANGLE')
 
         Rectangle.all_rectangles.append(self)
+        # try to merge with all other rectangles, but if close enough
         for i in range(0, len(Rectangle.all_rectangles) - 1):
             Rectangle.all_rectangles[i].merge_with(self)
         self.draw_all()
@@ -48,14 +50,17 @@ class Rectangle:
                 left = min(self.get_left_bound(), other_rectangle.get_left_bound())
 
                 # remove the old components of the new merged rectangle
+                Rectangle.removed_rectangles.append(other_rectangle)
+                Rectangle.removed_rectangles.append(self)
+
                 Rectangle.all_rectangles.remove(other_rectangle)
                 Rectangle.all_rectangles.remove(self)
 
-                # temporary fix
+                # TODO remove and fix
                 try:
                     merged_rect = Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
                 except:
-                    print("Something went wrong when merging rectangles!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                    print("Something went wrong when MERGING rectangles!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
                 return True
 
@@ -126,13 +131,24 @@ class Rectangle:
                 down_bound = point[1]
         return down_bound
 
+    # once you get the removed rectangles, the removed rectangles is cleared
+    @staticmethod
+    def get_removed_rectangles():
+        temp = Rectangle.removed_rectangles.copy()
+        Rectangle.removed_rectangles.clear()
+        return temp
+
+    @staticmethod
+    def get_all_rectangles():
+        return Rectangle.all_rectangles
+
     @staticmethod
     def draw_all():
         for rect in Rectangle.all_rectangles:
             for i in range(0, len(rect.points)):
                 cv2.line(image, rect.points[i], rect.points[(i + 1) % len(rect.points)], (255, 0, 0), 5)
-            #print(rect.points)
-        #print('')
+            # print(rect.points)
+        # print('')
 
 
 def draw_left(x, y, threshold, timeout):
@@ -264,7 +280,7 @@ def getMouse(event, x, y, flags, param):
 
         # TODO there is an error when bad cords are given by the draw_(direction) functions (at the edge, giving 'None')
         # fix by changing the return cords on the draw_(direction) functions
-        # temp fix
+        # temp fix:
         if top is None or bot is None or right is None or left is None:
             return
 
@@ -273,7 +289,13 @@ def getMouse(event, x, y, flags, param):
         try:
             detected_rect = Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
         except:
-            print("Something went wrong with Rectangle, but lets suppress it!")
+            print("Something went wrong with Rectangle, but let's suppress it!")
+
+    if event == cv2.EVENT_RBUTTONDOWN:
+        print('PRINT ALL RECTS TO UPDATE')
+        for rect in Rectangle.get_removed_rectangles():
+            print(rect.points)
+        print('END THE PRINTING\n')
 
 
 # bind the function to window
@@ -284,7 +306,8 @@ cv2.setMouseCallback('DrawOutline', getMouse)
 while 1:
     # TODO FIND BETTER WAY TO REDRAW
     # redraws all buildings every frame, but shouldn't matter too much because the user sees only 1 pic at a time
-    image = cv2.imread(filename).copy() # clears the image
+    # clears the image
+    image = cv2.imread(filename).copy()
     Rectangle.draw_all()
     cv2.imshow('DrawOutline', image)
     if cv2.waitKey(20) & 0xFF == 27:

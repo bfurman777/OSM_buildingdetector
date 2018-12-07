@@ -8,6 +8,8 @@ Feature: Computer-detected shapes on click merge as another building is detected
 
 NOTE: image must be in grayscale
 '''
+#TODO ADD a new_rectangles function
+
 
 import cv2
 import time
@@ -24,22 +26,40 @@ width = image.shape[1]
 class Rectangle:
     all_rectangles = []
     removed_rectangles = [] # access removed_rectangles with get_removed_rectangles()
-    tolerable_distance_to_combine_rectangles = 11 # arbitrary number
+    tolerable_distance_to_combine_rectangles = 21 # arbitrary number
+    id = 0
 
     def __init__(self, init_points):
         self.points = init_points   # a point is a tuple
+        self.id = Rectangle.id
+        Rectangle.id += 1
+
+        print("")
+        print("all_rectangles {}".format(self.arr_all_rect_id()))
 
         if len(self.points) > 4:
             self.points = self.points[:4]
             print('TOO MANY POINTS IN A RECTANGLE')
 
         Rectangle.all_rectangles.append(self)
+        print("Adding {} to all_rectangles".format(self.get_id_str()))
+        print("all_rectangles {}".format(self.arr_all_rect_id()))
+
         # try to merge with all other rectangles, but if close enough
         for i in range(0, len(Rectangle.all_rectangles) - 1):
-            Rectangle.all_rectangles[i].merge_with(self)
+            if Rectangle.all_rectangles[i].merge_with(self):
+                break
         self.draw_all()
 
+    # temp for debugging
+    def arr_all_rect_id(self):
+        id_arr = []
+        for rect in Rectangle.all_rectangles:
+            id_arr.append(rect.get_id_str())
+        return id_arr
+
     def merge_with(self, other_rectangle):
+
         for point in other_rectangle.points:
             # if the rectangles overlap
             if self.has_point_inside_approx(point):
@@ -50,20 +70,18 @@ class Rectangle:
                 left = min(self.get_left_bound(), other_rectangle.get_left_bound())
 
                 # remove the old components of the new merged rectangle
+
+                print("merging {} and {}".format(self.get_id_str(), other_rectangle.get_id_str()))
+
                 Rectangle.removed_rectangles.append(other_rectangle)
                 Rectangle.removed_rectangles.append(self)
 
                 Rectangle.all_rectangles.remove(other_rectangle)
                 Rectangle.all_rectangles.remove(self)
 
-                # TODO remove and fix
-                try:
-                    merged_rect = Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
-                except:
-                    print("Something went wrong when MERGING rectangles!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
 
                 return True
-
         return False
 
     # Checks if a point is inside/on the borders
@@ -142,6 +160,13 @@ class Rectangle:
     def get_all_rectangles():
         return Rectangle.all_rectangles
 
+    def get_id(self):
+        return self.id
+
+    # just for debugging
+    def get_id_str(self):
+        return "id{}".format(self.get_id())
+
     @staticmethod
     def draw_all():
         for rect in Rectangle.all_rectangles:
@@ -178,6 +203,8 @@ def draw_left(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return left_x_compare
+    return 0
+
 
 
 def draw_up(x, y, threshold, timeout):
@@ -207,6 +234,7 @@ def draw_up(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return up_y_compare
+    return 0
 
 
 def draw_down(x, y, threshold, timeout):
@@ -236,6 +264,7 @@ def draw_down(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return down_y_compare
+    return height - 1
 
 
 def draw_right(x, y, threshold, timeout):
@@ -265,6 +294,7 @@ def draw_right(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return right_x_compare
+    return width - 1
 
 
 # GETS USER CLICKS
@@ -281,15 +311,10 @@ def getMouse(event, x, y, flags, param):
         # TODO there is an error when bad cords are given by the draw_(direction) functions (at the edge, giving 'None')
         # fix by changing the return cords on the draw_(direction) functions
         # temp fix:
-        if top is None or bot is None or right is None or left is None:
-            return
+        #if top is None or bot is None or right is None or left is None:
+         #   return
 
-        # create rectangle object, its draws it and keeps track of all rectangles, and merges them
-        # temporary fix
-        try:
-            detected_rect = Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
-        except:
-            print("Something went wrong with Rectangle, but let's suppress it!")
+        Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
 
     if event == cv2.EVENT_RBUTTONDOWN:
         print('PRINT ALL RECTS TO UPDATE')

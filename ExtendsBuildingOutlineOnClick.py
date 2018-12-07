@@ -8,7 +8,6 @@ Feature: Computer-detected shapes on click merge as another building is detected
 
 NOTE: image must be in grayscale
 '''
-#TODO ADD a new_rectangles function
 
 
 import cv2
@@ -24,26 +23,28 @@ width = image.shape[1]
 
 # all rectangles are parallel to the xy axis
 class Rectangle:
+    current_id = 0
+
+    # list of all rectangles in existence
     all_rectangles = []
-    removed_rectangles = [] # access removed_rectangles with get_removed_rectangles()
-    tolerable_distance_to_combine_rectangles = 21 # arbitrary number
-    id = 0
+
+    # recently changed rectangles that need to be recognized by the backend
+    # access added_rectangles and removed_rectangles through get_changed_rectangles()
+    added_rectangles = []
+    removed_rectangles = []
+
+    tolerable_distance_to_combine_rectangles = 25  # arbitrary number deduced with testing given images TODO !!!!!!!
 
     def __init__(self, init_points):
         self.points = init_points   # a point is a tuple
-        self.id = Rectangle.id
-        Rectangle.id += 1
-
-        print("")
-        print("all_rectangles {}".format(self.arr_all_rect_id()))
+        Rectangle.current_id += 1
+        self.id = Rectangle.current_id
 
         if len(self.points) > 4:
             self.points = self.points[:4]
             print('TOO MANY POINTS IN A RECTANGLE')
 
-        Rectangle.all_rectangles.append(self)
-        print("Adding {} to all_rectangles".format(self.get_id_str()))
-        print("all_rectangles {}".format(self.arr_all_rect_id()))
+        Rectangle.add_rectangle(self)
 
         # try to merge with all other rectangles, but if close enough
         for i in range(0, len(Rectangle.all_rectangles) - 1):
@@ -51,15 +52,16 @@ class Rectangle:
                 break
         self.draw_all()
 
-    # temp for debugging
-    def arr_all_rect_id(self):
-        id_arr = []
-        for rect in Rectangle.all_rectangles:
-            id_arr.append(rect.get_id_str())
-        return id_arr
+        print('PRINT ALL RECTS TO UPDATE')
+        print('--- ADDED_RECTS:')
+        for rect in Rectangle.added_rectangles:
+            print(rect.get_id_str())
+        print('--- REMOVED_RECTS:')
+        for rect in Rectangle.removed_rectangles:
+            print(rect.get_id_str())
+        print('END THE PRINTING\n')
 
     def merge_with(self, other_rectangle):
-
         for point in other_rectangle.points:
             # if the rectangles overlap
             if self.has_point_inside_approx(point):
@@ -69,18 +71,12 @@ class Rectangle:
                 right = max(self.get_right_bound(), other_rectangle.get_right_bound())
                 left = min(self.get_left_bound(), other_rectangle.get_left_bound())
 
-                # remove the old components of the new merged rectangle
+                # updating the static added_rectangles and removed_rectangles lists
+                Rectangle.remove_rectangle(other_rectangle)
+                Rectangle.remove_rectangle(self)
 
-                print("merging {} and {}".format(self.get_id_str(), other_rectangle.get_id_str()))
-
-                Rectangle.removed_rectangles.append(other_rectangle)
-                Rectangle.removed_rectangles.append(self)
-
-                Rectangle.all_rectangles.remove(other_rectangle)
-                Rectangle.all_rectangles.remove(self)
-
+                # make a new merged rectangle
                 Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
-
                 return True
         return False
 
@@ -149,12 +145,40 @@ class Rectangle:
                 down_bound = point[1]
         return down_bound
 
-    # once you get the removed rectangles, the removed rectangles is cleared
+    # once you get the added and removed rectangles, those lists are cleared is cleared
+    # returns a tuple of lists -> (added_rectangles_list, removed_rectangles_list)
+    @staticmethod
+    def get_changed_rectangles():
+        return Rectangle.get_added_rectangles(), Rectangle.get_removed_rectangles()
+
+    @staticmethod
+    def get_added_rectangles():
+        temp = Rectangle.added_rectangles.copy()
+        Rectangle.added_rectangles.clear()
+        return temp
+
     @staticmethod
     def get_removed_rectangles():
         temp = Rectangle.removed_rectangles.copy()
         Rectangle.removed_rectangles.clear()
         return temp
+
+    # updating the static added_rectangles and removed_rectangles lists
+    @staticmethod
+    def remove_rectangle(rect):
+        # if rectangle was added recently and not seen by the backend yet
+        if rect in Rectangle.added_rectangles:
+            Rectangle.added_rectangles.remove(rect)
+        else:  # rectangle is established on the backend and needs to be removed
+            Rectangle.removed_rectangles.append(rect)
+
+        Rectangle.all_rectangles.remove(rect)
+
+    # updating the static added_rectangles and removed_rectangles lists
+    @staticmethod
+    def add_rectangle(rect):
+        Rectangle.all_rectangles.append(rect)
+        Rectangle.added_rectangles.append(rect)
 
     @staticmethod
     def get_all_rectangles():
@@ -163,17 +187,22 @@ class Rectangle:
     def get_id(self):
         return self.id
 
-    # just for debugging
+    # just for debugging #TODO remove
     def get_id_str(self):
         return "id{}".format(self.get_id())
+
+    @staticmethod # for debugging TODO remove
+    def arr_all_rect_id():
+        id_arr = []
+        for rect in Rectangle.all_rectangles:
+            id_arr.append(rect.get_id_str())
+        return id_arr
 
     @staticmethod
     def draw_all():
         for rect in Rectangle.all_rectangles:
             for i in range(0, len(rect.points)):
                 cv2.line(image, rect.points[i], rect.points[(i + 1) % len(rect.points)], (255, 0, 0), 5)
-            # print(rect.points)
-        # print('')
 
 
 def draw_left(x, y, threshold, timeout):
@@ -308,18 +337,16 @@ def getMouse(event, x, y, flags, param):
         right = draw_right(x, y, threshold, timeout)
         left = draw_left(x, y, threshold, timeout)
 
-        # TODO there is an error when bad cords are given by the draw_(direction) functions (at the edge, giving 'None')
-        # fix by changing the return cords on the draw_(direction) functions
-        # temp fix:
-        #if top is None or bot is None or right is None or left is None:
-         #   return
-
         Rectangle([(right, top), (left, top), (left, bot), (right, bot)])
 
     if event == cv2.EVENT_RBUTTONDOWN:
         print('PRINT ALL RECTS TO UPDATE')
+        print('--- ADDED_RECTS:')
+        for rect in Rectangle.get_added_rectangles():
+            print(rect.get_id_str())
+        print('--- REMOVED_RECTS:')
         for rect in Rectangle.get_removed_rectangles():
-            print(rect.points)
+            print(rect.get_id_str())
         print('END THE PRINTING\n')
 
 

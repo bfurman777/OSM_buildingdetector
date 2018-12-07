@@ -247,14 +247,14 @@ def draw_down(x, y, threshold, timeout):
     :return: Y coordinate where pixel gradient is hit
     """
     y_position = y
-    while y_position != height:
+    while y_position != height - 1:
         y_position += 1
         if time.time() > timeout:
             break
 
         # Setting the value of the compare image
-        if y_position > height - 10:
-            down_y_compare = height
+        if y_position > height - 11:
+            down_y_compare = height - 11
         else:
             down_y_compare = y_position + 10
 
@@ -264,7 +264,7 @@ def draw_down(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return down_y_compare
-    return height - 1
+    return height
 
 
 def draw_right(x, y, threshold, timeout):
@@ -277,14 +277,14 @@ def draw_right(x, y, threshold, timeout):
     :return: X coordinate where pixel gradient is hit
     """
     x_position = x
-    while x_position != width:
+    while x_position != width - 1:
         x_position += 1
         if time.time() > timeout:
             break
 
         # Setting the value of the compare image
-        if x_position > width - 10:
-            right_x_compare = width
+        if x_position > width - 11:
+            right_x_compare = width - 11
         else:
             right_x_compare = x_position + 10
 
@@ -294,7 +294,7 @@ def draw_right(x, y, threshold, timeout):
 
         if abs(current_intensity - compare_intensity) > threshold:
             return right_x_compare
-    return width - 1
+    return width
 
 
 # GETS USER CLICKS
